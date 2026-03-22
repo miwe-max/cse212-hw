@@ -1,4 +1,4 @@
-﻿public static class DisplaySums {
+﻿﻿public static class DisplaySums {
     public static void Run() {
         DisplaySumPairs([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         // Should show something like (order does not matter):
@@ -28,6 +28,17 @@
     /// </summary>
     /// <param name="numbers">array of integers</param>
     private static void DisplaySumPairs(int[] numbers) {
-        // TODO Problem 2 - This should print pairs of numbers in the given array
+        HashSet<int> seenNumbers = new HashSet<int>();
+
+        foreach (int x in numbers) {
+            int complement = 10 - x;
+            if (seenNumbers.Contains(complement)) {
+                // Display smaller number first to avoid duplicates
+                int first = Math.Min(x, complement);
+                int second = Math.Max(x, complement);
+                Console.WriteLine($"{first} {second}");
+            }
+            seenNumbers.Add(x);
+        }
     }
 }
